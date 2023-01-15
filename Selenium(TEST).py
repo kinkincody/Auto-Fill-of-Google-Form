@@ -22,24 +22,27 @@ for i in range(2,100):
     mul = ws[0].cells(i,7).value
     
     options = webdriver.ChromeOptions().add_argument('--disable-notifications')
+    #user-data-dir=C:\\Users\\user\\AppData\\Local\\Google\\Chrome\\User Data will add cookies
     chrome = webdriver.Chrome(cdm().install(), options = options)
-    chrome.get('https://forms.gle/ZWKxZPXkcmoSzYiv9')
+    chrome.get('https://forms.gle/ZWKxZPXkcmoSzYiv9') #google form link
+    
     chrome.maximize_window()
     time.sleep(3)
 
-    q1 = chrome.find_element(By.XPATH, f'//input[@jsname="YPqjbf"]')
+    q1 = chrome.find_element(By.XPATH, f'//input[@jsname="YPqjbf"]') #input normal text
     q1.send_keys(f'{name}')
     
-    q2 = chrome.find_elements(By.XPATH, f'//div[@class="lLfZXe fnxRtf cNDBpf"]//div//div//div//div//div[@aria-label={clas}]')
+    q2 = chrome.find_elements(By.XPATH, f'//div[@class="lLfZXe fnxRtf cNDBpf"]//div//div//div//div//div[@aria-label={clas}]') #radio button1
     q2[0].click()
     
-    q3 = chrome.find_elements(By.XPATH, '//div[@class="lLfZXe fnxRtf cNDBpf"]//div//div//div//div//div[@aria-label="1"]')
+    q3 = chrome.find_elements(By.XPATH, '//div[@class="lLfZXe fnxRtf cNDBpf"]//div//div//div//div//div[@aria-label="1"]') # radio button with similar answer
     q3[1].click()
     
-    q4 = chrome.find_elements(By.XPATH, f'//div[@role="list"]//div//div[@aria-label={clas2}]')
+    q4 = chrome.find_elements(By.XPATH, f'//div[@role="list"]//div//div[@aria-label={clas2}]') #checkbox
     q4[0].click()
     
-    q5 = chrome.find_elements(By.XPATH, '//div[@role="listbox"]')
+    q5 = chrome.find_elements(By.XPATH, '//div[@role="listbox"]') #dropdown menu
+    #google form drop down menu is a bit different, there is no <select> in source code, need to indicate the exact XPATH
     q5[0].click()
     time.sleep(1)
     
@@ -55,13 +58,17 @@ for i in range(2,100):
     
     time.sleep(1)
     
-    q7 = chrome.find_elements(By.XPATH, '//div[@aria-label="column1，對「row1」的回應"]')
+    q7 = chrome.find_elements(By.XPATH, '//div[@aria-label="column1，對「row1」的回應"]')#multiple choice
     q7[0].click()
     
     submit = chrome.find_element(By.XPATH, '//span[contains(text(), "提交")]')
+    #submit, if using English, please convert the Chinese into English
     submit.click()
     
     time.sleep(2)
     
     chrome.close()
+    
+    
+    #the time.sleep is used for ensure the script does not run too fast and error. Wait can be used instead
 
